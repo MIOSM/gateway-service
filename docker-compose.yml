@@ -1,0 +1,13 @@
+services:
+  gateway:
+    build: .
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - miosm
+
+networks:
+  miosm:
+    external: true
+    name: MIOSM-network
