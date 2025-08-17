@@ -18,7 +18,12 @@ public class GatewayConfig {
                         .uri("lb://auth-service"))
                 .route("auth-service-user-update", r -> r.path("/user/update")
                         .uri("lb://auth-service"))
+                .route("auth-service-user-profile", r -> r.path("/user/profile")
+                        .filters(f -> f.rewritePath("/user/profile", "/auth/me"))
+                        .uri("lb://auth-service"))
                 .route("user-service", r -> r.path("/user/**")
+                        .uri("lb://user-service"))
+                .route("user-service-images", r -> r.path("/api/images/**")
                         .uri("lb://user-service"))
                 .build();
     }
