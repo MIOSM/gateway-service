@@ -25,6 +25,9 @@ public class GatewayConfig {
                         .uri("lb://user-service"))
                 .route("user-service-images", r -> r.path("/api/images/**")
                         .uri("lb://user-service"))
+                .route("post-service", r -> r.path("/post-service/**")
+                        .filters(f -> f.rewritePath("/post-service/(?<segment>.*)", "/${segment}"))
+                        .uri("lb://post-service"))
                 .build();
     }
 
